@@ -89,18 +89,40 @@ class Enemy : public GameObject {
 
 class Character : public GameObject {
     public:
-        Character(const std::string& name, int level) : GameObject(name), level(level) {
+        Character(const std::string& name, int level) : GameObject(name), level(level){
             // Specific initialization for characters
+            : GameObject(name), level(level), experience(experience){}
+            void displayInfoCharacter(){
+                displayInfo();
+                cout<<"Level: "<<level<<endl;
+                cout<<"Experience: "<<experience<<endl;
         }
 
         void displayInfoCharacter() {
             displayInfo();
-            cout << "Level: " << level << "\n";
+            cout<<"Level: "<<level<<endl;
         }
 
     private:
         int level;
+        int experience;
+    }
 };
+
+
+class Weapon : public GameObject {
+public:
+    Weapon(const string& name, int damage) : GameObject(name), damage(damage) {}
+
+    void displayInfoWeapon() {
+        displayInfo();
+        cout << "Damage: " << damage << "\n";
+    }
+
+private:
+    int damage;
+};
+
 
 
 int main() {

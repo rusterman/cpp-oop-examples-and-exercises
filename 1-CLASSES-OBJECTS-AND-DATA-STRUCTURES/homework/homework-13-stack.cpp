@@ -1,5 +1,6 @@
-#include "LinkedList.h"
-#include "LinkedList.h"
+#include <iostream>
+
+using namespace std;
 
 /*
     Definition of Stack:
@@ -65,6 +66,119 @@
 
 /*  Solution  */
 
+struct Node{
+    int data;
+    Node* next;
+    Node(int val){
+        data=val;
+        next=nullptr;
+    }
+};
+
+
+class LinkedList{
+private:
+    Node* head;
+public:
+    LinkedList() : head(nullptr){}
+
+    Node* getHead() {return head;}
+
+    void insertAtHead(int val){
+        Node* newNode=new Node(val);
+        newNode->next=head;
+        head=newNode;
+    }
+
+    void deleteHead() {
+        if(head==nullptr){
+            return; 
+        }
+        Node* temp = head;
+        head = head->next;
+        delete temp;
+    }
+
+    bool isEmpty() { return head == nullptr; }
+
+    void display(){
+        if(isEmpty()){
+            cout<<"Stack is empty!"<<endl;
+            return;
+        }
+        cout<<"Display Stack: ";
+        Node* temp=head;
+        while(temp){
+            cout<<"["<<temp->data<<" | "<<temp->next<<"]";
+            if(temp->next){
+                cout<<" ---> ";
+            }
+            temp=temp->next;
+        }
+        cout<<endl;
+    }
+
+    ~LinkedList(){
+        Node* temp=head;
+        while(temp){
+            Node* nextNode=temp->next;
+            cout<<"   delete on "<<temp->data<<endl;
+            delete temp;
+            temp=nextNode;
+        }
+    }
+};
+
+
+class LinkedListStack{
+private:
+    LinkedList list;
+    int count;
+public:
+    LinkedListStack(){}
+
+    LinkedListStack& push(int val){
+        list.insertAtHead(val);
+        count++;
+        return *this; 
+    }
+
+    LinkedListStack& pop(){
+        if(list.isEmpty()){
+            cout<<"Nothing to pop (^_^)"<<endl;
+        } 
+        else{
+            list.deleteHead();
+            count--;
+        }
+        return *this;
+    }
+
+    void peek(){
+        Node* head=list.getHead();
+        if(head==nullptr){
+            cout<<"Nothing to peek (^_^)"<<endl;
+        } 
+        else{
+            cout<<"Peek: ["<<head->data<<" | "<<head->next<<"]"<<endl;
+        }
+    }
+
+    bool isEmpty() {return list.isEmpty();}
+
+    int size(){
+        return count;
+    }
+
+    void displayStack(){
+        list.display();
+    }
+
+    ~LinkedListStack() {
+        cout<<"Start Stack Deallocation:\n -Destructor:"<<endl;
+        cout<<"End of Stack Deallocation"<<endl;
+    }
+};
 
 
 

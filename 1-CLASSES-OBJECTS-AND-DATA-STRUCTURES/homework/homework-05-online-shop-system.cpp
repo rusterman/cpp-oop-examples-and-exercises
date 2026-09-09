@@ -1,5 +1,6 @@
 #include <iostream>
-
+#include "Product.h"
+#include "Order.h"
 using namespace std;
 
 /*
@@ -65,9 +66,9 @@ int main() {
     Order order(1, "John Doe");
 
     // Add products to the order
-    order.addProduct(p1);
-    order.addProduct(p2);
-    order.addProduct(p3);
+    order.addProduct(&p1);
+    order.addProduct(&p2);
+    order.addProduct(&p3);
 
     // Calculate the order total
     double total = order.calculateOrderTotal();
@@ -77,8 +78,8 @@ int main() {
     cout << "Customer Name: " << order.getCustomerName() << endl;
     cout << "Ordered Products:" << endl;
 
-    for (const Product& product : order.getOrderedProducts()) {
-        cout << " - " << product.getProductName() << endl;
+    for (const Product* product : order.getOrderedProducts()) {
+        cout << " - " << product->getProductName() << endl;
     }
     
     cout << "Total: $" << total << endl;

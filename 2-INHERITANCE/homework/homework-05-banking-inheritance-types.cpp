@@ -47,6 +47,81 @@ using namespace std;
     Solution
 */
 
+class Account{
+protected:
+    int accountNumber;
+    string accountHolder;
+    double balance;
+
+public:
+    Account(int accNum, string holder, double bal)
+        : accountNumber(accNum), accountHolder(holder), balance(bal){}
+
+    void deposit(double amount){
+        balance+=amount;
+        cout<<"Deposit: "<<amount<<" Balance: "<<balance<<endl;
+    }
+
+    void withdraw(double amount){
+        if(balance>=amount){
+            balance-=amount;
+            cout<<"Withdraw: "<<amount<<" Balance: "<<balance<<endl;
+        } 
+        else{
+            cout<<"Insufficient Funds"<<endl;
+        }
+    }
+
+    double getBalance() const{
+        return balance;
+    }
+};
+
+
+class SavingsAccount : public Account{
+public:
+    SavingsAccount(int accNum, string holder, double bal)
+        : Account(accNum, holder, bal) {}
+
+    void applyInterest(double rate){
+        balance= bacalnce+(balance*rate);
+        cout<<"Interest Applied: Balance: "<<balance<<endl;
+    }
+};
+
+
+class CheckingAccount : protected Account{
+public:
+    CheckingAccount(int accNum, string holder, double bal)
+        : Account(accNum, holder, bal){}
+
+    void applyMonthlyFee(double fee){
+        balance-=fee;
+        cout<<"Monthly Fee Applied: Balance: "<<balance<<endl;
+    }
+
+    void deposit(double amount) {Account::deposit(amount);}
+    void withdraw(double amount) {Account::withdraw(amount);}
+    double getBalance() const {return Account::getBalance();}
+};
+
+class CreditCardAccount : private Account{
+public:
+    CreditCardAccount(int accNum, string holder, double bal)
+        : Account(accNum, holder, bal) {}
+
+    void makePurchase(double amount){
+        if(balance>=amount){
+            balance-=amount;
+            cout<<"Purchase Made: Amount: "<<amount<<" Balance: "<<balance<<endl;
+        } 
+        else{
+            cout<<"Insufficient Funds"<<endl;
+        }
+    }
+
+    double getBalance() const {return Account::getBalance();}
+};
 
 int main() {
 

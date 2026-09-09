@@ -1,8 +1,6 @@
-
 #include <iostream>
-
+#include <string>
 using namespace std;
-
 /*
     Exercise:   
     Create a program to manage a library with books using Object-Oriented Programming (OOP) principles in C++. 
@@ -40,6 +38,29 @@ using namespace std;
 
 class Book {
     // TODO:
+private:
+    string title;
+    string author;
+    int year;
+
+public:
+    Book(){
+        title="";
+        author="";
+        year=0;
+    }
+
+    Book(const string& t, const string& a, int y){
+        title=t;
+        author=a;
+        year=y;
+    }
+
+    void display() const {
+        cout<<"Title:"<<title<<endl;
+        cout<<"Author:"<<author<<endl;
+        cout<<"Year:"<<year<<endl;
+    }
 };
 
 
@@ -48,15 +69,28 @@ int main() {
     const int librarySize = 5;
     Book library[librarySize];
 
-    cout << "Enter details for " << librarySize << " books:" << endl;
+    cout << "Enter details for " << librarySize << " books: " << endl;
     for (int i = 0; i < librarySize; ++i) {
         // TODO: 
+        string title, author;
+        int year;
+        cout<<"Book"<<i + 1<<"title:";
+        getline(cin, title);
+
+        cout<<"Book "<<i + 1<<"author:";
+        getline(cin, author);
+
+        cout<<"Book"<<i + 1<<"year:";
+        cin >> year;
+        library[i]=Book(title, author, year);
     }
 
     cout << endl << "Library Contents:" << endl;
     for (int i = 0; i < librarySize; ++i) {
         cout << "Book " << i + 1 << ":" << endl;
         // TODO:
+        library[i].display();
+        cout << endl;
     }
 
 }

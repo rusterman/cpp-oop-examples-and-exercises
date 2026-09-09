@@ -43,6 +43,28 @@ using namespace std;
 
 /*    Solution    */
 
+class Person{
+protected:
+    string name;
+    int age;
+    int grades;
+
+public:
+    Person(string n, int a, int g) : name(n), age(a), grades(g){}
+
+    int GetGrades() const{
+        return grades;
+    }
+};
+
+class Teacher : public Person{
+public:
+    Teacher(string n, int a, int g) : Person(n, a, g){}
+
+    void ReviewGrades(){
+        cout<<"Teacher "<<name<<" grades: "<<grades<<endl;
+    }
+};
 
 
 

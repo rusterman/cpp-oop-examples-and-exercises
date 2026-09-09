@@ -56,7 +56,55 @@ using namespace std;
 
 /*  Solution  */
 
+class Vehicle{
+private:
+    int id;
+    int maxSpeed;
 
+public:
+    Vehicle(int i, int s) : id(i), maxSpeed(s) {}
+    virtual void display() const {
+        cout<<"Vehicle ID: "<<id<<", Max Speed: "<<maxSpeed<<" km/h" << endl;
+    }
+    virtual ~Vehicle(){}
+};
+
+class Car : public Vehicle{
+private:
+    int numDoors;
+
+public:
+    Car(int i, int s, int d) : Vehicle(i, s), numDoors(d){}
+    void calculateFuelEfficiency(){
+        cout<<"Fuel efficiency calculated for Car with "<<numDoors<<" doors."<<endl;
+    }
+};
+
+class Bus : public Vehicle{
+private:
+    int maxPassengers;
+
+public:
+    Bus(int i, int s, int p) : Vehicle(i, s), maxPassengers(p){}
+    void announceNextStop(){
+        cout<<"Next stop announced for Bus with capacity "<<maxPassengers<<"."<<endl;
+    }
+};
+
+class Manager{
+private:
+    vector<Vehicle*> fleet;
+
+public:
+    void addVehicle(Vehicle* v){
+        fleet.push_back(v);
+    }
+    void displayFleet(){
+        for(auto v : fleet){
+            v->display();
+        }
+    }
+};
 
 
 int main() {

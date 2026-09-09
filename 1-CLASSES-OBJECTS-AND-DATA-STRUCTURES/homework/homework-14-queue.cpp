@@ -74,6 +74,93 @@ using namespace std;
 
 /*  Solution  */
 
+struct Node{
+    int data;
+    Node* next;
+    Node(int val){
+        data=val;
+        next=nullptr;
+    }
+};
+
+class LinkedList{
+private:
+    Node* head;
+    Node* tail;
+public:
+    LinkedList() : head(nullptr), tail(nullptr){}
+
+    Node* getHead() {return head;}
+    Node* getTail() {return tail;}
+
+    void insertAtTail(int val){
+        Node* newNode=new Node(val);
+        if(tail==nullptr){
+            head=tail=newNode;
+        } 
+        else{
+            tail->next=newNode;
+            tail=newNode;
+        }
+    }
+
+    int deleteHead(){
+        if(head==nullptr){
+            throw underflow_error("Queue underflow");
+        }
+        Node* temp=head;
+        int val=temp->data;
+        head=head->next;
+        if(head==nullptr){
+            tail=nullptr;
+        }
+        delete temp;
+        return val;
+    }
+
+    bool isEmpty() {return head==nullptr;}
+
+    ~LinkedList(){
+        while(head){
+            Node* temp=head;
+            head=head->next;
+            delete temp;
+        }
+    }
+};
+
+class Queue{
+private:
+    LinkedList list;
+    int count;
+public:
+    Queue() : count(0) {}
+    void enqueue(int val){
+        list.insertAtTail(val);
+        count++;
+    }
+
+    int dequeue(){
+        if(isEmpty()){
+            cout<<"Nothing to dequeue (^_^)"<<endl;
+            return -1; 
+        }
+        count--;
+        return list.deleteHead();
+    }
+
+    int peek(){
+        if(isEmpty()){
+            cout<<"Nothing to peek (^_^)"<<endl;
+            return -1;
+        }
+        return list.getHead()->data;
+    }
+
+    bool isEmpty() {return list.isEmpty();}
+
+    int size() {return count;}
+};
 
 
 int main() {
