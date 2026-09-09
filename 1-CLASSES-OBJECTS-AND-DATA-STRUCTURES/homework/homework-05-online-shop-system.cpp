@@ -1,60 +1,65 @@
 #include <iostream>
-
+#include <string>
+#include <vector>
 using namespace std;
-
-/*
-    Exercise: Online Shop System
-
-    Description:
-    Design and implement an Online Shop System using multiple files and classes in C++. 
-    The system should allow you to manage products and orders in an online shop.
-
-    Requirements:
-
-    1. Create two classes: "Product" and "Order".
-
-    2. The "Product" class should have the following attributes:
-        Product ID (an integer)
-        Product name (a string)
-        Product price (a floating-point number)
-
-    3. The "Order" class should have the following attributes:
-        Order ID (an integer)
-        Customer name (a string)
-        Ordered products (an array/vector of Product objects)
-        (Vectors: https://www.geeksforgeeks.org/vector-in-cpp-stl/)
-    
-    4. Define the "Product" class in a separate header file called "Product.h" 
-    and implement its member functions.
-
-    5. Define the "Order" class in a separate header file called "Order.h" 
-    and implement its member functions
-
-    6. Include the necessary header files in the main program file.
-
-    7. Demonstrate the functionality of the Online Shop System by creating products, 
-    creating orders, and performing operations like adding products to orders, calculating order totals, etc.
-
-    Tips:
-
-    Use header files to declare the class structure and member function prototypes.
-    Use include guards or pragma once to prevent multiple inclusion of header files.
-    
-    This exercise will help you practice creating separate classes in different files 
-    and including them in a main program file to build a functional Online Shop System!
-*/
+class Product{
+    private:
+    int ProductId;
+    string ProductName;
+    double ProductPrice;
+    public:
+    Product(int ProductId = 0 , string ProductName = "0" , double ProductPrice = 0){
+        this -> ProductId = ProductId;
+        this -> ProductName = ProductName;
+        this -> ProductPrice = ProductPrice;
+    }
+    int getId() const {
+        return ProductId;
+    }
+    string getProductName()const{
+        return ProductName;
+    }
+    double getProductPrice()const{
+        return ProductPrice;
+    }
 
 
-/* 
-    Solution
-*/
+};
+class Order{
+    private:
+    int OrderId;
+    string CustomerName;
+    vector<Product> products;
+    public:
+    Order(int OrderId = 0 , string CustomerName = "0"){
+        this -> OrderId = OrderId;
+        this -> CustomerName = CustomerName;
+    }
+    void addProduct(Product product){
+        products.push_back(product);
+    }
+    double calculateOrderTotal(){
+        double total = 0;
+        for(int i = 0; i < products.size(); i++){
+            total = total + products[i].getProductPrice();
+        }
+        return total;
+    }
+    int getOrderID(){
+        return OrderId;
+    }
 
+    string getCustomerName(){
+        return CustomerName;
+    }
 
-
-
+    vector<Product> getOrderedProducts(){
+        return products;
+    }
+};
 int main() {
 
-    system("clear");
+    system("cls");
 
     // Create products
     Product p1(1, "Product 1", 10.0);

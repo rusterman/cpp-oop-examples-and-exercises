@@ -19,7 +19,7 @@ using namespace std;
 */
 
 // Base class for user authentication
-class Authenticator {
+class Authenticator{
     public:
         // TODO: Declare a pure virtual function for authentication
         virtual bool authenticate(const string& username, const string& password) const = 0;
@@ -27,7 +27,7 @@ class Authenticator {
 
 
 // TODO: Decide whether to mark the following class as final or not
-class BasicAuthenticator : public Authenticator {
+class BasicAuthenticator final : public Authenticator{
     public:
         BasicAuthenticator(const string& validUsername, const string& validPassword)
             : validUsername_(validUsername), validPassword_(validPassword) {}
@@ -44,13 +44,18 @@ class BasicAuthenticator : public Authenticator {
 
 // TODO: Create a derived class (you can name it CustomAuthenticator) that attempts to extend BasicAuthenticator
 // Uncommenting the following lines should result in a compilation error if BasicAuthenticator is marked as final
-/*
-    class CustomAuthenticator : public BasicAuthenticator {
+
+    /*class CustomAuthenticator : public BasicAuthenticator {
     public:
         CustomAuthenticator(const string& validUsername, const string& validPassword)
             : BasicAuthenticator(validUsername, validPassword) {}
-    };
-*/
+    };*/  
+
+    /*BasicAuthenticator bu sinifin qarsisina final acar sozu yazilanda ondan inherit etmek mumkun olmur.ona gore de yeni yazilan CustomAuthenticator
+    klassi da xeta verecek.Main hissede yaazilmis obyektde xeta verecek cunki hemin obyekt BasicAuthenticatordan inherit etmeye calisir.Amma  final class
+    olmasa ondan inherit etmek mumkun olan main hissede yazdigimiz obyektde mumkun olar ve her sey problemsiz isleyer.*/
+
+
 
 int main() {
 
@@ -66,15 +71,15 @@ int main() {
 
     // TODO: Create an instance of CustomAuthenticator (if allowed) and attempt authentication
 
-    /*
-        CustomAuthenticator customAuth("user", "pass");
+    
+        /*CustomAuthenticator customAuth("user", "pass");
 
         if (customAuth.authenticate("user", "pass")) {
             cout << "Authentication successful!" << endl;
         } else {
             cout << "Authentication failed!" << endl;
         }
-    */
+        */
 
     return 0;
 }

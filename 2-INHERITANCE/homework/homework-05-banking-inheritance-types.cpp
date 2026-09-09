@@ -1,59 +1,77 @@
-#include <iostream>
-#include <string>
-
+#include<iostream>
 using namespace std;
+class Account{
+    protected:
+    int AccountNumber;
+    string AccountHolder;
+    double balance;
+    public:
+    Account(int AccountNumber = 0 , string AccountHolder = "Unknown" , double balance = 0){
+        this -> AccountNumber = AccountNumber;
+        this -> AccountHolder = AccountHolder;
+        this -> balance = balance;
+    }
+    void deposit(double value){
+        if(value > 0){
+        cout << "deposit: " << value <<endl;
+        balance = balance + value;
+        cout << "balance: " << balance << endl;
+        }
+    }
+    void withdraw(double value){
+        cout << "Withdraw value: " << value << endl;
+        if(value > 0 && value < balance){
+            balance = balance - value;
+            cout << "balance: " << balance << endl;
+        }
+        else{
+            cout << "Invalid balance" <<endl;
+        }
+    }
+    int getBalance(){
+        return balance;
+    }
+};
+class SavingsAccount : public Account{
+    public:
+    SavingsAccount(int AccountNumber , string AccountHolder , double balance) : Account(AccountNumber , AccountHolder , balance){
+    }
+    void applyInterest(double val){
+        balance = balance + balance*val;
+        cout << "Numerical value of the percentage: " << val << endl;
+        cout << "balance: " << balance << endl; 
+    }
 
-
-/*
-    Exercise: Inheritance in a Banking Software Application
-
-    In this exercise, you will design a simplified banking software application using C++ classes 
-    to demonstrate the real need for public, protected, and private inheritance. 
-    The application will model a basic bank system with different types of accounts and transactions. 
-    You will create a base class for "Account" and derive three different types of accounts from it. 
-    Then, you will demonstrate the appropriate usage of public, protected, and private inheritance in this context.
-
-    Part 1: Base Class and Inheritance
-        1. Create a base class called Account with the following properties and methods:
-        Properties: accountNumber, accountHolder, balance
-        Methods: deposit, withdraw, getBalance
-
-        2. Derive three classes from the Account base class:
-        a. SavingsAccount: This should inherit using public inheritance. 
-        Add a method called applyInterest that increases the balance based on an interest rate.
-        b. CheckingAccount: This should inherit using protected inheritance. 
-        Add a method called applyMonthlyFee that deducts a fixed fee from the balance every month.
-        c. CreditCardAccount: This should inherit using private inheritance. 
-        Add a method called makePurchase that deducts a specified amount from the balance.
-    
-    Part 2: Demonstration
-        1. In your main function, instantiate objects of each of the derived classes (SavingsAccount, CheckingAccount, CreditCardAccount).
-        2. Simulate transactions using the instantiated objects: 
-        Deposit and withdraw funds from each account. 
-        Apply interest to the SavingsAccount.
-        Apply monthly fees to the CheckingAccount.
-        Make purchases using the CreditCardAccount.
-        3. Display the account details and balances after each transaction.
-
-    Part 3: Analysis
-
-    1. Explain why public inheritance is suitable for the SavingsAccount class.
-    2. Discuss the advantages of using protected inheritance for the CheckingAccount class.
-    3. Justify the use of private inheritance for the CreditCardAccount class.
-*/
-
-
-/*
-    Solution
-*/
-
-
-int main() {
-
-    system("clear");
-
-    /*    Example Usage    */
-
+};
+class CheckingAccount : protected Account{
+    public:
+    CheckingAccount(int AccountNumber , string AccountHolder , double balance ) : Account(AccountNumber , AccountHolder , balance){
+    }
+    void applyMonthlyFee(double val){
+        cout << "AplyMonthlyFee: " << val <<endl;
+     if(balance >= val){
+        balance = balance - val;
+        cout << "balance: " <<balance<<endl;
+    }
+}
+};
+class CreditCardAccount : private Account{
+    public:
+    CreditCardAccount(int AccountNumber , string AccountHolder , double balance ) : Account(AccountNumber , AccountHolder , balance){
+    }
+    void makePurchase(double val){
+        cout << "Purchase: " << val << endl;
+        if(balance > val && val > 0){
+            balance = balance - val;
+            cout << "balance: " << balance << endl;
+        }
+        else{
+            cout << "Invalid purchase" << endl;
+        }
+    }
+};
+int main(){
+    system("cls");
     SavingsAccount savings(1001, "John Doe", 1000.0);
     CheckingAccount checking(2001, "Jane Smith", 1500.0);
     CreditCardAccount creditCard(3001, "Alice Johnson", 500.0);
@@ -66,15 +84,4 @@ int main() {
 
     creditCard.makePurchase(200);
     creditCard.makePurchase(400);
-
-    /*
-        [Output]
-
-        Deposit: 500 Balance: 1500
-        Interest Applied: Balance: 1575
-        Withdraw: 200 Balance: 1375
-        Monthly Fee Applied: Balance: 1490
-        Purchase Made: Amount: 200 Balance: 300
-        Insufficient Funds
-    */
 }

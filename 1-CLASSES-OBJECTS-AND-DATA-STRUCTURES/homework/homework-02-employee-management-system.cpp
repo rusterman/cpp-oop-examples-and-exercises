@@ -1,51 +1,36 @@
 #include <iostream>
 #include <string>
-
 using namespace std;
+class Employee{
+    private:
+    int ID;
+    string name;
+    string designation;
+    double salary;
+    public:
+     Employee(int pID = 0 , string Pname = "Unknown" , string Pdesignation = "unknown" , double Psalary = 0.0){
+        ID = pID;
+        name = Pname;
+        designation = Pdesignation;
+        salary = Psalary;
+    }
 
-/*
-    Exercise: Employee Management System
+    void setID(int pID){ID = pID;}
+    void setName(string Pname){name = Pname;}
+    void setDesignation(string Pdesignation){designation = Pdesignation;}
+    void setSalary(double Psalary){salary = Psalary;}
 
-    Description:
-    Design and implement an Employee Management System using classes and constructors in C++. 
-    The system should allow you to create and manage employee records.
+    void displayDetails(){
+        cout << ID << endl;
+        cout <<  name << endl;
+        cout << designation << endl;
+        cout << salary << endl;
 
-    Requirements:
+    }
 
-    1. Create a class named "Employee" with the following attributes:
-    Employee ID (an integer)
-    Employee name (a string)
-    Employee designation (a string)
-    Employee salary (a floating-point number)
-
-    2. Implement the following constructors for the "Employee" class:
-    A parameterized constructor that initializes all the attributes based on provided values.
-    A default constructor that sets default values for the attributes.
-
-    3. Include member functions to:
-    Set and get the employee attributes (ID, name, designation, salary).
-    Display the employee details.
-
-    4. Create multiple employee objects using different constructors and display their details.
-
-    Tips:
-    Use appropriate access specifiers (such as private and public) for the class members.
-    Consider using default values in the parameterized constructor to provide flexibility when creating objects.
-    Test the functionality of constructors by creating objects with and without providing initial values.
-    This exercise will help you practice creating and initializing objects using constructors and defaulted constructors, as well as accessing and displaying object attributes.
-*/
-
-
-
-/*  Solution */
-
-
-
-int main() {
-
-    /*      Example usage:     */ 
-
-    // Creating employee objects using different constructors
+};
+int main(){
+    system("cls");
     Employee emp1(101, "John Doe", "Manager", 5000.0);
     Employee emp2;
 

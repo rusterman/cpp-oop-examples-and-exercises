@@ -24,24 +24,33 @@ using namespace std;
 
 class Shape {
     public:
-        // Static method to compare the areas of two shapes
-        // Hint: You'll need to access the CalculateArea static methods in the derived classes.
+        static bool CompareAreas(double area1 , double area2){
+            if(area1 == area2){
+                return true;
+            }
+            else{
+                return false;
+            }
+        }
 };
 
 class Circle : public Shape {
     public:
+    double radius;
         Circle(double radius) : radius(radius) {}
-
-        // Static method to calculate the area of a circle
-        // Hint: Use the formula for calculating the area of a circle (A = π * r^2)
+        static double CalculateArea(double radius , const double pi = 3.14){
+            return pi*radius*radius;
+        }
 };
 
 class Rectangle : public Shape {
     public:
+    double width;
+    double height;
         Rectangle(double width, double height) : width(width), height(height) {}
-
-        // Static method to calculate the area of a rectangle
-        // Hint: Use the formula for calculating the area of a rectangle (A = width * height)
+        static double CalculateArea(double width , double height){
+            return width*height;
+        }
 };
 
 int main() {
@@ -53,9 +62,12 @@ int main() {
     cout << "Enter the width and height of a rectangle: ";
     cin >> rectWidth >> rectHeight;
 
-    // Calculate and display the areas using the static methods
+    double CircleArea = Circle::CalculateArea(circleRadius);
+    double RectArea = Rectangle::CalculateArea(rectWidth , rectHeight);
+    cout << "Circle Area: " << CircleArea <<endl;
+    cout << "Rectangle Area: " << RectArea << endl;
+    bool checking = Shape::CompareAreas(CircleArea , RectArea);
+    cout << "Checking: " << checking << endl;
 
-    // Implement comparisons of areas using the static method in the Shape class
 
-    return 0;
 }

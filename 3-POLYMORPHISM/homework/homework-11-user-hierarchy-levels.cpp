@@ -4,38 +4,55 @@
 using namespace std;
 
 
-/*
-    Polymorphism
+class User{
+    protected:
+    string name;
+    public:
+    User(string name){
+        this -> name = name;
+    }
+    virtual void login(){
+        cout << "Login" << endl;
+    }
+    virtual void logout(){
+        cout << "Logout..." << endl;
+    }
+    virtual void performAction(){
+        cout << "Perform Action...." <<endl;
+    }
+    virtual void viewProfile(){
+        cout << "Viewing the profil of " << name << endl;
+    }
+};
+class AdminUser : public User{
+    public:
+    AdminUser(string name) : User(name){}
 
-    11. Inheritance and Polymorphism at different levels
-*/
+};
+class Siteuser : public User{
+    public:
+    Siteuser(string name) : User(name){}
+    virtual void postCommet(){
+        cout<<"Comment posted by " << name << endl;
+    }
 
+};
+class ModeratorUser : public AdminUser{
+    public:
+    ModeratorUser(string name) : AdminUser(name){}
+    virtual void moderateContent(){
+        cout << "Content moderated by " <<name <<endl;
+    }
 
-/*
-    Exercise: Enhancing User Hierarchy
+};
+class ManagerUser : public AdminUser{
+    public:
+    ManagerUser(string name) : AdminUser(name){}
+    virtual void manageUsers(){
+        cout << "Users managed by " << name << endl;
+    }
 
-    1. Create a ModeratorUser class:
-        Create a new class ModeratorUser that inherits from AdminUser. 
-        A moderator user has the ability to moderate content.
-    2. Create a ManagerUser class:
-        Create a new class ManagerUser that inherits from AdminUser. 
-        A manager user has the ability to manage users.
-    3. Implement new functions:
-        ~ Add a new virtual function in User called viewProfile that prints a message like "Viewing the profile of [username]."
-        ~ Add a new virtual function in SiteUser called postComment that prints a message like "Comment posted by [username]."
-        ~ Add a new virtual function in ModeratorUser called moderateContent that prints a message like "Content moderated by [username]."
-        ~ Add a new virtual function in ManagerUser called manageUsers that prints a message like "Users managed by [username]."
-    4. Compile and run your program: Make sure it compiles and runs without errors.
-*/
-
-
-
-/*
-    Solution
-*/ 
-
-
-
+};
 int main() {
 
     /*  Example usage:  */ 

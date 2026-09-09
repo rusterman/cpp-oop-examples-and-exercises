@@ -1,137 +1,87 @@
-#include <iostream>
-#include <string>
-
+#include<iostream>
 using namespace std;
-
-
-/*
-    Exercise Title: Understanding Custom Constructors with Inheritance
-*/
-
-
-/*
-    Tasks:
-
-    1. In the below code describe the purpose of the GameObject class. 
-    What common functionality does it provide for its derived classes?
-
-    2. Explain the concept of inheritance as demonstrated in the code. 
-    How are the Player, Enemy, and Character classes related to the GameObject class?
-
-    3. Identify and describe the purpose of the constructors in the derived classes (Player, Enemy, Character). 
-    How do they initialize the member variables of the derived classes and the base class?
-
-    4. In the main function, three objects are created: player, enemy, and character. 
-    Explain how these objects are constructed using the provided constructors.
-
-    5. Describe the benefits of using inheritance in this scenario. 
-    How does it contribute to code organization and reusability?
-
-    6. Imagine you need to add a new class called Weapon that inherits from GameObject and has an additional attribute called damage. 
-    Extend the code to include the Weapon class and demonstrate its usage in the main function.
-
-    7. Modify the Character class to include an additional attribute, 
-    such as experience, and update its constructor and displayInfoCharacter method accordingly. 
-    Reflect on how these changes affect the overall structure of the program.
-
-    8. Discuss potential improvements or alternative approaches that 
-    could be taken to design a similar system with better maintainability and extensibility.
-*/
-
-
-
-class GameObject {
+class Account{
+    protected:
+    int AccountNumber;
+    string AccountHolder;
+    double balance;
     public:
-        GameObject(const string& name) : name(name) {
-            // Common initialization for all game objects
+    Account(int AccountNumber = 0 , string AccountHolder = "Unknown" , double balance = 0){
+        this -> AccountNumber = AccountNumber;
+        this -> AccountHolder = AccountHolder;
+        this -> balance = balance;
+    }
+    void deposit(double value){
+        if(value > 0){
+        cout << "deposit: " << value <<endl;
+        balance = balance + value;
+        cout << "balance: " << balance << endl;
         }
-
-        void displayInfo() {
-            cout << "Name: " << name << "\n";
+    }
+    void withdraw(double value){
+        cout << "Withdraw value: " << value << endl;
+        if(value > 0 && value < balance){
+            balance = balance - value;
+            cout << "balance: " << balance << endl;
         }
-
-    private:
-        string name;
+        else{
+            cout << "Invalid balance" <<endl;
+        }
+    }
+    int getBalance(){
+        return balance;
+    }
 };
-
-
-class Player : public GameObject {
+class SavingsAccount : public Account{
     public:
-        Player(const string& name, int health) : GameObject(name), health(health) {
-            // Specific initialization for players
-        }
+    SavingsAccount(int AccountNumber , string AccountHolder , double balance) : Account(AccountNumber , AccountHolder , balance){
+    }
+    void applyInterest(double val){
+        balance = balance + balance*val;
+        cout << "Numerical value of the percentage: " << val << endl;
+        cout << "balance: " << balance << endl; 
+    }
 
-        void displayInfoPlayer() {
-            displayInfo();
-            cout << "Health: " << health << "\n";
-        }
-
-    private:
-        int health;
 };
-
-
-class Enemy : public GameObject {
+class CheckingAccount : protected Account{
     public:
-        Enemy(const std::string& name, int damage) : GameObject(name), damage(damage) {
-            // Specific initialization for enemies
-        }
-
-        void displayInfoEnemy() {
-            displayInfo();
-            cout << "Damage: " << damage << "\n";
-        }
-
-    private:
-        int damage;
+    CheckingAccount(int AccountNumber , string AccountHolder , double balance ) : Account(AccountNumber , AccountHolder , balance){
+    }
+    void applyMonthlyFee(double val){
+        cout << "AplyMonthlyFee: " << val <<endl;
+     if(balance >= val){
+        balance = balance - val;
+        cout << "balance: " <<balance<<endl;
+    }
+}
 };
-
-
-class Character : public GameObject {
+class CreditCardAccount : private Account{
     public:
-        Character(const std::string& name, int level) : GameObject(name), level(level) {
-            // Specific initialization for characters
+    CreditCardAccount(int AccountNumber , string AccountHolder , double balance ) : Account(AccountNumber , AccountHolder , balance){
+    }
+    void makePurchase(double val){
+        cout << "Purchase: " << val << endl;
+        if(balance > val && val > 0){
+            balance = balance - val;
+            cout << "balance: " << balance << endl;
         }
-
-        void displayInfoCharacter() {
-            displayInfo();
-            cout << "Level: " << level << "\n";
+        else{
+            cout << "Invalid purchase" << endl;
         }
-
-    private:
-        int level;
+    }
 };
+int main(){
+    system("cls");
+    SavingsAccount savings(1001, "John Doe", 1000.0);
+    CheckingAccount checking(2001, "Jane Smith", 1500.0);
+    CreditCardAccount creditCard(3001, "Alice Johnson", 500.0);
 
+    savings.deposit(500);
+    savings.applyInterest(0.05);
+    savings.withdraw(200);
+    
+    checking.applyMonthlyFee(10);
 
-int main() {
-
-    system("clear");
-
-    /*   Example Usage   */
-    Player player("Hero", 100);
-    Enemy enemy("Goblin", 20);
-    Character character("Adventurer", 5);
-
-    player.displayInfoPlayer();
-    cout << endl;
-
-    enemy.displayInfoEnemy();
-    cout << endl;
-
-    character.displayInfoCharacter();
-
-    /*
-        [Output]
-        
-        Name: Hero
-        Health: 100
-
-        Name: Goblin
-        Damage: 20
-
-        Name: Adventurer
-        Level: 5
-    */
-
-    return 0;
+    creditCard.makePurchase(200);
+    creditCard.makePurchase(400);
 }

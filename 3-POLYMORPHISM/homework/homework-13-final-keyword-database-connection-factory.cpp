@@ -18,12 +18,13 @@ using namespace std;
 // Base class representing a database connection
 class DatabaseConnection {
     public:
+    virtual ~DatabaseConnection() = default;
         // Establishes a connection to the database
         virtual void connect() const = 0;
 };
 
 // TODO: Decide whether to mark the following class as final or not
-class MySqlConnection : public DatabaseConnection {
+class MySqlConnection final : public DatabaseConnection {
     public:
         void connect() const override {
             cout << "Connecting to MySQL database..." << endl;
@@ -32,7 +33,7 @@ class MySqlConnection : public DatabaseConnection {
 };
 
 // TODO: Decide whether to mark the following class as final or not
-class PostgresConnection : public DatabaseConnection {
+class PostgresConnection final : public DatabaseConnection {
     public:
         void connect() const override {
             cout << "Connecting to PostgreSQL database..." << endl;
@@ -45,15 +46,16 @@ class ConnectionFactory {
     public:
         // TODO: Decide whether to mark the following methods as static or not
         // Factory method to create a MySQL connection
-        DatabaseConnection* createMySQLConnection() {
+        static DatabaseConnection* createMySQLConnection() {
             return new MySqlConnection();
         }
 
         // Factory method to create a PostgreSQL connection
-        DatabaseConnection* createPostgresConnection() {
+        static DatabaseConnection* createPostgresConnection() {
             return new PostgresConnection();
         }
-};
+}; // Bu methodlari static etmek mentiqlidir cunki hem main hissede kodu sadelesdirmek olar obyekt yaratmamis bir basa cagirmaq mumkun olar.Hemde onun meberi yoxdu
+// sadece PostgreConnection() ve ya MySqlConnection() baglantisini qaytaran bir nov servis funksiyasidir. 
 
 
 int main() {
@@ -62,10 +64,13 @@ int main() {
     ConnectionFactory factory;
     DatabaseConnection* mysqlConnection = factory.createMySQLConnection();
     DatabaseConnection* postgresConnection = factory.createPostgresConnection();
+    DatabaseConnection* postgresConnection1 = factory.createMySQLConnection();
+    ConnectionFactory::createMySQLConnection(); // bele de cagirmaq olar meselen daha sade
 
     // TODO: Decide whether to uncomment the following lines to delete instances
-    // delete mysqlConnection;
-    // delete postgresConnection;
+    delete mysqlConnection;
+    delete postgresConnection;
+    delete postgresConnection1;
 
     return 0;
 }

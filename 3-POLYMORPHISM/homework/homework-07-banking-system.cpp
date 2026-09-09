@@ -1,89 +1,75 @@
-#include <iostream>
-#include <string>
-
+#include<iostream>
 using namespace std;
+class Account{
+    protected:
+    int AccountNumber;
+    double balance;
+    public:
+    Account(int AccountNumber , double balance){
+        this -> AccountNumber = AccountNumber;
+        this -> balance = balance;
+    }
+    virtual void deposit(double amount){
+        balance = balance + amount;
+    }
+    virtual void withdraw(double amount){
+        if(amount > 0 && amount <= balance){
+        balance = balance - amount;
+        }
+        else{
+            cout << "Invalid amount" <<endl;
+        }
+    }
+    virtual void displayBalance(){
+        cout << "Account Number: " << AccountNumber << endl;
+        cout << "Balance: " << balance <<endl;
+    }
+    virtual ~Account(){}
+};
+class SavingsAccount : public Account{
+    private:
+    double InterestRate;
+    public:
+    SavingsAccount(int AccountNumber , double balance , double InterestRate) : Account(AccountNumber , balance){
+        this -> InterestRate = InterestRate;
+    }
+    virtual void displayBalance()override{
+        Account :: displayBalance();
+        cout << "Total balance(it means with inherit): " << balance + balance*(InterestRate/100) <<endl;
+    }
+    virtual void withdraw(double amount)override{
+        Account::withdraw(amount);
+    }
+};
+class CheckingAccount : public Account{
+    public:
+    CheckingAccount(int AccountNumber , double balance) : Account(AccountNumber , balance){}
+    virtual void displayBalance() override{
+        Account :: displayBalance();
+        cout << "Checking Account balance: " <<balance <<endl;
+    }
+    virtual void withdraw(double amount)override{
+        Account :: withdraw(amount);
+    }
+};
+int main(){
+    system("cls");
+    Account *accounts[2];
+    accounts[0] = new SavingsAccount(37737373 , 800.0 , 3);
+    accounts[1] = new CheckingAccount(29929929 , 900.0);
+    cout << "--------Operations---------" <<endl;
+    accounts[0] -> withdraw(500.9);
+    accounts[1] -> deposit(450.3);
+    accounts[0] -> deposit(65.7);
+    accounts[1] -> withdraw(7000.8);
+    for(int i = 0 ; i < 2 ; i++){
+        accounts[i] -> displayBalance();
+    }
+    for(int i = 0 ; i<2 ;i++){
+        delete accounts[i];
+    }
 
-/*
-    Exercise: Implement a Banking System
 
-    In this exercise, you will create a basic banking system with the following classes:
-
-    1. Account (Base Class):
-        Create a base class called Account with the following attributes and methods:
-        - accountNumber (integer)
-        - balance (double)
-        - Account(const int accountNumber, const double balance) constructor.
-        - A virtual destructor for proper resource cleanup.
-        - virtual void deposit(double amount) method to deposit funds into the account.
-        - virtual void withdraw(double amount) method to withdraw funds from the account.
-        - virtual void displayBalance() method to display the current balance.
-
-    2. SavingsAccount (Derived Class):
-        Create a derived class called SavingsAccount that inherits from Account. This class should include:
-         - A constructor that takes an account number, initial balance, and an interest rate (e.g., 3%).
-         - An overridden displayBalance() method that displays the current balance along with the interest rate.
-         - An overridden withdraw() method that checks if the withdrawal amount is less than the balance and, if so, 
-           processes the withdrawal. If the withdrawal amount exceeds the balance, display an error message.
-    3.  CheckingAccount (Derived Class):
-         - Create another derived class called CheckingAccount that inherits from Account. This class should include:
-         - A constructor that takes an account number and initial balance.
-         - An overridden displayBalance() method that displays the current balance along with a message indicating it's a checking account.
-         - An overridden withdraw() method that checks if the withdrawal amount is less than the balance and, if so, 
-           processes the withdrawal. If the withdrawal amount exceeds the balance, display an error message.
-    4. Main Function:
-        - In the main() function, create instances of both SavingsAccount and CheckingAccount. 
-        - Deposit and withdraw funds from these accounts, and display their balances to demonstrate polymorphism.
+   
     
-    5. Proper Cleanup:
-     - Make sure to delete the account objects at the end of the main() function to ensure that their destructors are called.
-*/
-
-
-class Account {
-    public:
-        // Constructor, virtual destructor, and methods go here
-
-        
-};
-
-
-class SavingsAccount : public Account {
-    public:
-        // Constructor and overridden methods go here
-
-        
-};
-
-
-class CheckingAccount : public Account {
-    public:
-        // Constructor and overridden methods go here
-
-        
-};
-
-
-int main() {
-    // Create instances of SavingsAccount and CheckingAccount
-    // Deposit and withdraw funds, display balances
-    // Properly clean up objects
-
-    /*
-        Erase: 
-
-        // Create SavingsAccount and CheckingAccount instances
-        Account* savings = new SavingsAccount(1001, 1000.0, 3.0); // Account Number, Initial Balance, Interest Rate
-        Account* checking = new CheckingAccount(2001, 2000.0);     // Account Number, Initial Balance
-
-        // Deposit and withdraw funds from accounts
-        
-
-        // Display balances using polymorphism
-        
-
-        // Properly clean up objects
-        
-    */
-
-    return 0;
 }

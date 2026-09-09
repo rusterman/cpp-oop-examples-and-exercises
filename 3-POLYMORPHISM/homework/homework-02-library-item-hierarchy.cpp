@@ -1,81 +1,77 @@
-#include <iostream>
-#include <string>
-
+#include<iostream>
 using namespace std;
+class LibraryItem{
+    private:
+    string title;
+    int year;
+    bool checkedout;
+    public:
+    LibraryItem(string title , int year , bool checkedout){
+        this -> title = title;
+        this -> year = year;
+        this -> checkedout = checkedout;
+    }
+    ~LibraryItem(){};
+    virtual void checkout(){
+        checkedout = true;
+    }
+    virtual void checkin(){
+        checkedout = false;    /* checkout , ve check in funksiyalarinin her hansi bir fealiyyeti yoxdur menim kodumda.Sadece tapsirirqda yazin deyilib deye yazmisam
+        */
+    }
+    virtual void displayInfo(){
+        cout << "Title: " << title << endl;
+        cout << "Year: " << year << endl;
+        cout << "Status: " << (checkedout ? "Checked out" : "Checked in") << endl;
+    }
+};
+class Book : public LibraryItem{
+    private:
+    string author;
+    public:
+    Book(string title , int year , bool checkedout , string author) : LibraryItem(title , year , checkedout){
+        this -> author = author;
+    }
+    virtual void displayInfo()override{
+        LibraryItem :: displayInfo();
+        cout << "Author: " << author << endl;
+    }
 
-/*
-    Exercise: Polymorphism in a Backend Application
+};
+class EBook : public LibraryItem{
+    private:
+    string format;
+    public:
+    EBook(string title , int year , bool checkedout , string format) : LibraryItem(title , year , checkedout){
+        this -> format = format;
+    }
+    virtual void displayInfo(){
+        LibraryItem :: displayInfo();
+        cout << "Format: " << format <<endl;
+    }
+};
+class AudioBook : public LibraryItem{
+    private:
+    string artist;
+    public:
+    AudioBook(string title , int year , bool checkedout , string artist) : LibraryItem(title , year , checkedout){
+        this -> artist = artist;
+    }
+    virtual void displayInfo(){
+        LibraryItem :: displayInfo();
+        cout << "Artist: " << artist << endl;
+    }
+};
+int main(){
+    system("cls");
+    Book book1("The Karamazov Brothers" , 1870 , true , "Fyodr Dostoevski"); // burda true - (Checked out un true oldugun gosterir) false ise checked in.
+    EBook ebook1("Ses" , 1970 , false , "Sabahattin Ali");
+    AudioBook audiobook1("Chess" , 1800 , true , "Stefan Zweig");
+    LibraryItem * items[] = {&book1 , &ebook1 , &audiobook1};
+    for(int i = 0 ; i < 3 ; i++){
+        items[i] -> displayInfo();
+        cout << "--------------" <<endl;
+    }
+   
 
-    Scenario:
-    You are developing a backend application for a library management system. 
-    The application needs to handle various types of items in the library, such as books, e-books, and audio CDs. 
-    Each of these items has specific properties and actions associated with them.
-
-    Requirements:
-
-    1. Create a base class called LibraryItem with the following properties and methods:
-        Properties:
-        title (string): The title of the library item.
-        year (int): The year of publication.
-        Methods:
-        virtual void checkout(): A virtual function that marks the item as checked out.
-        virtual void checkin(): A virtual function that marks the item as checked in.
-        virtual void displayInfo(): A virtual function that displays information about the item, 
-        including its title and year of publication.
-
-    2. Create three derived classes: Book, EBook, and AudioCD, each inheriting from LibraryItem. 
-       These classes should have their own specific properties and methods:
-        Book:
-        Properties:
-        author (string): The author of the book.
-        Methods:
-        Override the displayInfo() method to include information about the author.
-        EBook:
-        Properties:
-        format (string): The format of the e-book (e.g., PDF, EPUB).
-        Methods:
-        Override the displayInfo() method to include information about the format.
-        AudioCD:
-        Properties:
-        artist (string): The artist of the audio CD.
-        Methods:
-        Override the displayInfo() method to include information about the artist.
-
-    3. In the main() function, create instances of Book, EBook, and AudioCD objects, each representing a library item.
-    4. Create an array of pointers to LibraryItem objects and store the addresses of the items in the array.
-    5. Use a loop to iterate through the array and perform the following actions:
-        Check out and check in each item to simulate library operations.
-        Display information about each item using the displayInfo() method.
-    
-
-    Example Output:
-
-    Book Title: "The Great Gatsby"
-    Author: F. Scott Fitzgerald
-    Year: 1925
-    Status: Checked out
-
-    EBook Title: "The Hitchhiker's Guide to the Galaxy"
-    Format: EPUB
-    Year: 1979
-    Status: Checked in
-
-    Audio CD Title: "Abbey Road"
-    Artist: The Beatles
-    Year: 1969
-    Status: Checked out
-
-*/
-
-// Solution
-
-
-
-int main() {
-
-    /*      Example usage:     */ 
-
-    
-
-    return 0;
 }

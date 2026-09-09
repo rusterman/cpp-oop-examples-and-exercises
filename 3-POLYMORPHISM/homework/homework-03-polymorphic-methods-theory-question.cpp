@@ -31,6 +31,8 @@ using namespace std;
 
 /*
     Solution:
+    Burda cavab move() methodudur. Cunki hereket mentiqi motorcycle da ve car da ferqlidir.Diger getter setter methodlar ise saddece qiymet qebul edib qiymet qaytarir.
+    Umumiyyetle ekser vaxt getter/setter funksiyalari polimorfik olmur.(istisnalar xaric).
         
 */
 
@@ -61,6 +63,9 @@ using namespace std;
 
 /*
     Solution:
+    Burda cavab calculateTax() ,  calculateShipping() dir.Bu methodlarin mentiqi butun child klasslarda ferqlidir.Meselen Book klassi olsun bezi olkelerde 
+    kitablardan vergi almirlar bezilerinde alinir.Bezi olkelerde elektronik esyalardan vergi cox alinir bezi lkelrede ise az ve s.Diger getter/setter funksiyalari
+    ise ancaq qiymet qebul edib qiymet qaytarir.
         
 */
 
@@ -93,6 +98,13 @@ using namespace std;
 
 /*
     Solution:
+    Burda cavab  postContent() , deleteContent() dir.
+    manageUsers() - polimorfik deyil.Sadece adminstrator sinifine aid olan bir methoddur. 
+    postContent() - post un  movzusu meselen regularUser de insanar metn mesaj paylasa bilerler contentCreator sinifinin numayendeleri sekil video paylasa biler.
+    deleteContent() - bu da child classlard ferqlidir.meselen regular user dekiler oz mesajlarin ve yazdiqlari metni sile bilerler amma content creator lar oz videolarin
+    sekillerin ve postlarinin altina yazilmis reyleri sile bilerler.
+    digerleri ise getter/setter methodlaridir ki onlar ancaq melumat qebul edib qaytarirlar.Amma polimorfik olanlar child classlarda coxuzlu ve coxformali olurlar.
+    yeni temelde eynidiler amma child classlarda ferqli esas emliyyatin ferqli formasin aparirlar.
 
     
 */
