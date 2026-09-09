@@ -44,14 +44,57 @@ class Employee {
 
     public:
         // TODO: Implement setters and getters
+        void setName(const string& n){
+            name=n;
+        }
+
+        void setAge(int a){
+            age=a;
+        }
+
+        void setPosition(const string& p){
+            position = p;
+        }
+
+        void setSalary(double s){
+            salary=s;
+        }
+
+        string getName() const{
+            return name;
+        }
+
+        int getAge() const{
+            return age;
+        }
+
+        string getPosition() const{
+            return position;
+        }
+
+        double getSalary() const{
+            return salary;
+    }
 
 };
+
 
 
 int main() {
 
     // TODO: Test the Employee class by creating an object, setting attributes, and getting attribute values
+    Employee emp;
 
+    emp.setName("Aysel");
+    emp.setAge(20);
+    emp.setPosition("Worker");
+    emp.setSalary(100);
+
+    cout<<"Employee Details:"<<endl;
+    cout<<"Name: "<<emp.getName()<<endl;
+    cout<<"Age: "<<emp.getAge()<<endl;
+    cout<<"Position: "<<emp.getPosition()<<endl;
+    cout<<"Salary: "<<emp.getSalary()<<endl;
     return 0;
 }
 

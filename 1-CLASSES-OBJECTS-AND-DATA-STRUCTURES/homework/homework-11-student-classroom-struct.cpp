@@ -24,8 +24,14 @@ using namespace std;
 
 
 /* Solution */
+
 struct Student {
     // Complete the code
+    string name;
+    int rollNumber;
+    double mathMarks;
+    double physicsMarks;
+    double chemistryMarks;
 };
 
 class Classroom {
@@ -34,6 +40,26 @@ class Classroom {
 
     public:
         // Complete the code
+        void addStudent(const Student& student){
+        students.push_back(student);
+    }
+
+    void displayStudents(){
+        for(const auto& student : students){
+            cout<<"Name: "<<student.name<<endl;
+            cout<<"Roll Number: "<<student.rollNumber<<endl;
+            cout<<"Maths Marks: "<<student.mathMarks<<endl;
+            cout<<"Physics Marks: "<<student.physicsMarks<<endl;
+            cout<<"Chemistry Marks: "<<student.chemistryMarks<<endl;
+        }
+    }
+
+    void displayAverageMarks(){
+        for(const auto& student : students){
+            double average=(student.mathMarks + student.physicsMarks + student.chemistryMarks)/3.0;
+            cout<<"Student "<<student.name<<" (Roll "<<student.rollNumber<<") Average Marks: "<<average<<endl;
+        }
+    }
 };
 
 

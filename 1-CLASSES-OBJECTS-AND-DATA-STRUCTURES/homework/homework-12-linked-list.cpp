@@ -128,7 +128,119 @@ using namespace std;
 
 /* Solution */
 
+struct Node{
+    int data;       
+    Node* next;     
 
+    Node(int val) : data(val), next(nullptr){}
+};
+
+
+class LinkedList{
+private:
+    Node* head;
+    Node* tail;   
+    int count;    
+public:
+    LinkedList() : head(nullptr), tail(nullptr), count(0){}
+ 
+    Node* getHead() {return head;}
+    Node* getTail() {return tail;}
+ 
+    LinkedList& insert(int val){
+        Node* newNode=new Node(val);
+        newNode->next=head;
+        head=newNode;
+        if(tail==nullptr){    
+            tail=newNode;
+        }
+        count++;
+        return *this;
+
+    }
+
+    LinkedList& display(){
+        Node* temp = head;
+        while(temp!=nullptr){
+            cout<<"["<<temp->data<<" | "<<temp->next<<"]";
+            if (temp->next!=nullptr){
+                cout<<" ---> ";
+            }
+            temp=temp->next;
+        }
+        cout<<endl;
+        return *this;
+    }
+
+
+    bool search(int val){
+        Node* temp=head;
+        while(temp!=nullptr){
+            if(temp->data == val){
+                return true;
+            }
+            temp=temp->next;
+        }
+        return false;
+    }
+
+    LinkedList& remove(int val){
+        Node* prev=nullptr;
+        Node* current=head;
+
+        while(current!=nullptr){
+            if(current->data == val){
+                if(prev==nullptr){
+                    head = current->next;
+                if(head==nullptr){
+                    tail = nullptr;
+                }
+            } 
+            else{
+                prev->next = current->next;
+                if(current==tail){
+                    tail=prev;
+                }
+            }
+            cout<<"delete on "<<current->data<<endl;
+            delete current;
+            count--;
+            return *this;
+        }
+        prev=current;
+        current=current->next;
+    }
+    return *this;
+}
+
+    LinkedList& append(int val){
+        Node* newNode=new Node(val);
+        if(!head){
+            head=tail=newNode;
+        } else {
+            tail->next=newNode;
+            tail=newNode;
+        }
+        count++;
+        return *this;
+    }
+ 
+    bool isEmpty() { return head == nullptr; }
+
+
+    int size() { return count; }
+ 
+    ~LinkedList(){
+        cout<<"\nDestructor: "<<endl;
+        Node* temp=head;
+        while(temp!=nullptr){
+            Node* toDelete = temp;
+            cout<<"    delete on "<<toDelete->data<<endl;
+            temp=temp->next;
+            delete toDelete;
+        }
+    }
+};
 
 int main() {
 

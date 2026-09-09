@@ -35,7 +35,53 @@ using namespace std;
     Solution 
 */
 class BankAccount {
-}
+private:
+    int accountNumber;
+    double balance;
+    static int accountCount; 
+
+public:
+    BankAccount(int accNumber, double initialBalance=0.0){
+        accountNumber=accNumber;
+        balance=initialBalance;
+        accountCount++;
+        cout<<"BankAccount created. Account Number: "<<accountNumber<<endl;
+    }
+
+    void deposit(double amount){
+        if(amount>0){
+            balance+=amount;
+            cout<<"Deposited "<<amount<<" into account "<<accountNumber<<endl;
+        } 
+        else{
+            cout<<"Error"<<endl;
+        }
+    }
+
+    void withdraw(double amount){
+        if(amount>0 && amount<=balance){
+            balance=balance-amount;
+            cout<<"Withdrew "<<amount<<" from account "<<accountNumber<<endl;
+        } 
+        else{
+            cout<<"Error"<<endl;
+        }
+    }
+
+    double getBalance() const {
+        return balance;
+    }
+
+    ~BankAccount(){
+        accountCount--;
+        cout<<"BankAccount closed. Account Number: "<<accountNumber<<endl;
+        if(accountCount==0){
+            cout<<"All accounts are now closed. Logging system shutdown."<<endl;
+        }
+    }
+};
+
+int BankAccount::accountCount=0;
 
 
 int main() {
