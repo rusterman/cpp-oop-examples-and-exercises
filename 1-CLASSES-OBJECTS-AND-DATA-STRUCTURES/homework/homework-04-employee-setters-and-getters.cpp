@@ -44,6 +44,30 @@ class Employee {
 
     public:
         // TODO: Implement setters and getters
+        void setname(const string& name){
+            this->name = name;
+        }
+        void setage(int age){
+            this->age = age;
+        }
+        void setPosition(const string& position){
+            this->position = position;
+        }
+        void setSalary(double salary){
+            this->salary = salary;
+        }
+        string getname() const{
+            return name;
+        }
+        int getage() const{
+            return age;
+        }
+        string getPosition() const{
+           return position;
+        }
+        double getSalary() const{
+            return salary;
+        }
 
 };
 
@@ -51,7 +75,15 @@ class Employee {
 int main() {
 
     // TODO: Test the Employee class by creating an object, setting attributes, and getting attribute values
-
+    Employee employee1;
+    employee1.setage(26);
+    employee1.setname("Huseyn");
+    employee1.setPosition("Ceo");
+    employee1.setSalary(3625);
+    cout << "employee's name: " << employee1.getname() << endl;
+    cout << "employee's age: " << employee1.getage() << endl;
+    cout << "employee's position: " << employee1.getPosition() << endl;
+    cout << "employee's salary: " << employee1.getSalary() << endl;
     return 0;
 }
 

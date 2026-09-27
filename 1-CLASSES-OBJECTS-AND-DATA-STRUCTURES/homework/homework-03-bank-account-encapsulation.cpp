@@ -29,10 +29,25 @@ class BankAccount {
         // Constructor
         BankAccount(int accountNumber, const string &holderName, double initialBalance) {
             // TODO: Initialize member variables
+            this->accountNumber = accountNumber;
+            this->holderName = holderName;
+            balance = initialBalance;
+        }
+        
+        // Member functions
+
+        // TODO: Implement member functions for deposit, withdraw, and check balance
+        void deposit(double amount1){
+
+            balance = balance + amount1;
+        }
+        void withdraw(double amount2){
+            balance = balance - amount2;
+        }
+        void checkBalance() const{
+            cout << "Balance is: " << balance << endl;
         }
 
-        // Member functions
-        // TODO: Implement member functions for deposit, withdraw, and check balance
 };
 
 
@@ -55,6 +70,11 @@ int main() {
         This exercise will help you practice encapsulation and understand how to hide 
         implementation details while exposing a controlled interface to the users of your class!
     */
+   BankAccount account1(1, "Huseyn Aghazada", 550.5);
+   account1.checkBalance();
+   account1.deposit(12.5);
+   account1.withdraw(26.7);
+   account1.checkBalance();
 
     return 0;
 }
