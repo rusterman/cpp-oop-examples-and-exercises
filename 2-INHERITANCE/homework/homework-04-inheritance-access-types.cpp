@@ -55,6 +55,68 @@ using namespace std;
 
 
 /*  Solution  */
+class Vehicle {
+protected:
+    int id;
+    int maxSpeed;
+
+public:
+    Vehicle(int i, int s) : id(i), maxSpeed(s) {}
+
+    virtual void display() {
+        cout << "Vehicle ID: " << id << ", Max Speed: " << maxSpeed << " km/h" << endl;
+    }
+};
+
+class Car : public Vehicle {   // Public inheritance
+private:
+    int numDoors;
+
+public:
+    Car(int i, int s, int d) : Vehicle(i, s), numDoors(d) {}
+
+    double calculateFuelEfficiency() {
+        return maxSpeed / (numDoors * 2.0); // sadə nümunə
+    }
+
+    void display() override {
+        Vehicle::display();
+        cout << "Doors: " << numDoors << endl;
+    }
+};
+
+class Bus : public Vehicle {   // Public inheritance
+private:
+    int maxPassengers;
+
+public:
+    Bus(int i, int s, int p) : Vehicle(i, s), maxPassengers(p) {}
+
+    void announceNextStop() {
+        cout << "Next stop announced for bus ID " << id << endl;
+    }
+
+    void display() override {
+        Vehicle::display();
+        cout << "Max Passengers: " << maxPassengers << endl;
+    }
+};
+
+class Manager {
+private:
+    vector<Vehicle*> fleet;
+
+public:
+    void addVehicle(Vehicle* v) {
+        fleet.push_back(v);
+    }
+
+    void displayFleet() {
+        for (auto v : fleet) {
+            v->display();
+        }
+    }
+};
 
 
 

@@ -28,23 +28,58 @@ using namespace std;
 /* Starter Code: */
 
 class Project {
-    // ... (Same as provided code)
+private:
+    string projectName;
+
+public:
+    Project(string name) : projectName(name) {}
+    Project() : projectName("Unnamed Project") {} // Overloaded constructor
+
+    string getProjectName() const { return projectName; }
 };
 
 class TeamMember {
-    // ... (Same as provided code)
+private:
+    string memberName;
+
+public:
+    TeamMember(string name) : memberName(name) {}
+    TeamMember() : memberName("Unnamed Member") {}
+
+    string getMemberName() const { return memberName; }
 };
 
 class Task {
-    // ... (Same as provided code)
+private:
+    string taskName;
+
+public:
+    Task(string name) : taskName(name) {}
+    Task() : taskName("Unnamed Task") {}
+
+    string getTaskName() const { return taskName; }
 };
 
 class ProjectTeamMember : public Project, public TeamMember {
-    // ... (Same as provided code)
+public:
+    ProjectTeamMember(string project, string member)
+        : Project(project), TeamMember(member) {}
+
+    void displayProjectTeamMember() {
+        cout << "Project: " << getProjectName() << endl;
+        cout << "Team Member: " << getMemberName() << endl;
+    }
 };
 
 class TeamMemberTask : public TeamMember, public Task {
-    // ... (Same as provided code)
+public:
+    TeamMemberTask(string member, string task)
+        : TeamMember(member), Task(task) {}
+
+    void displayTeamMemberTask() {
+        cout << "Team Member: " << getMemberName() << endl;
+        cout << "Task: " << getTaskName() << endl;
+    }
 };
 
 

@@ -46,6 +46,71 @@ using namespace std;
 /*
     Solution
 */
+class Account {
+protected:
+    int accountNumber;
+    string accountHolder;
+    double balance;
+
+public:
+    Account(int accNo, string holder, double bal)
+        : accountNumber(accNo), accountHolder(holder), balance(bal) {}
+
+    void deposit(double amount) {
+        balance += amount;
+        cout << "Deposit: " << amount << " Balance: " << balance << endl;
+    }
+
+    void withdraw(double amount) {
+        if (amount <= balance) {
+            balance -= amount;
+            cout << "Withdraw: " << amount << " Balance: " << balance << endl;
+        } else {
+            cout << "Insufficient Funds" << endl;
+        }
+    }
+
+    double getBalance() const {
+        return balance;
+    }
+};
+
+class SavingsAccount : public Account { // public inheritance
+public:
+    SavingsAccount(int accNo, string holder, double bal)
+        : Account(accNo, holder, bal) {}
+
+    void applyInterest(double rate) {
+        balance += balance * rate;
+        cout << "Interest Applied: Balance: " << balance << endl;
+    }
+};
+
+class CheckingAccount : protected Account { // protected inheritance
+public:
+    CheckingAccount(int accNo, string holder, double bal)
+        : Account(accNo, holder, bal) {}
+
+    void applyMonthlyFee(double fee) {
+        balance -= fee;
+        cout << "Monthly Fee Applied: Balance: " << balance << endl;
+    }
+};
+
+class CreditCardAccount : private Account { // private inheritance
+public:
+    CreditCardAccount(int accNo, string holder, double bal)
+        : Account(accNo, holder, bal) {}
+
+    void makePurchase(double amount) {
+        if (amount <= balance) {
+            balance -= amount;
+            cout << "Purchase Made: Amount: " << amount << " Balance: " << balance << endl;
+        } else {
+            cout << "Insufficient Funds" << endl;
+        }
+    }
+};
 
 
 int main() {
