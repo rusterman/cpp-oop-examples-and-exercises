@@ -3,6 +3,8 @@
 
 using namespace std;
 
+/* solved */
+
 /*
     Exercise: Library Management System
 
