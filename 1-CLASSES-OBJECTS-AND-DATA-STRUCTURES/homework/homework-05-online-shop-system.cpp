@@ -1,4 +1,5 @@
 #include <iostream>
+#include <vector>
 
 using namespace std;
 
@@ -59,7 +60,14 @@ public:
     double getProductPrice() const;
     
 };
+ 
+class Order{
+private:
+    int orderID;
+    string customerName;
+    vector<Product> orderedProducts;
 
+};
 
 
 int main() {
