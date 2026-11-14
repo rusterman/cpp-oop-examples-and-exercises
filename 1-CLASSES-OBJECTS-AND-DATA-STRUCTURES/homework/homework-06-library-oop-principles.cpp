@@ -39,8 +39,31 @@ using namespace std;
 /* Solution */
 
 class Book {
-    // TODO:
+private:
+    string title;
+    string author;
+    int year;
+public:
+     Book() {
+        title = " ";
+        author = " ";
+        year = 0;
+    }
+
+    Book(string title, string author, int year) {
+        this->title = title;
+        this->author = author;
+        this->year = year;
+    }
+
+    void display(){
+        cout << "Title: " << title << endl;
+        cout << "Author: " << author << endl;
+        cout << "Year: " << year << endl;
+    }
+
 };
+
 
 
 int main() {
@@ -51,12 +74,34 @@ int main() {
     cout << "Enter details for " << librarySize << " books:" << endl;
     for (int i = 0; i < librarySize; ++i) {
         // TODO: 
+
+        string title, author; int year;
+
+        cout << "Book " << i + 1 << endl;
+
+        cout << "Enter title: ";
+        getline(cin, title);
+
+        cout<< "Enter author: ";
+        getline(cin, author);
+
+        cout<< "Enter year: ";
+        cin >> year ;
+        cin.ignore(); //yeni setire otururrrmm
+
+        library[i] = Book(title, author, year);
     }
 
     cout << endl << "Library Contents:" << endl;
     for (int i = 0; i < librarySize; ++i) {
         cout << "Book " << i + 1 << ":" << endl;
         // TODO:
+
+        cout << endl;
+        cout << "Book " << i + 1 << " -- " << endl;
+        library[i].display();
+
+
     }
 
 }
