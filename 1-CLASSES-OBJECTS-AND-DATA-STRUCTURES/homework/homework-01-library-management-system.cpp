@@ -34,10 +34,30 @@ using namespace std;
 */
 
 
+class Book{
+private:
+    string title;
+    string author;
+    int publicationYear;
+    string ISBN;
 
-/*  Solution */
+public:
+    void setBookDetails(string t, string a, int year, string isbn)
+    {
+        title = t;
+        author = a;
+        publicationYear = year;
+        ISBN = isbn;
+    }
 
-
+    void displayBookDetails()
+    {
+        cout << "Title: " << title << endl;
+        cout << "Author: " << author << endl;
+        cout << "Publication Year: " << publicationYear << endl;
+        cout << "ISBN: " << ISBN << endl;
+    }
+};
 
 int main() {
 

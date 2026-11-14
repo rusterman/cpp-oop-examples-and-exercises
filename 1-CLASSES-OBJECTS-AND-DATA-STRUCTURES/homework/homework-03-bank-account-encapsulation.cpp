@@ -28,11 +28,33 @@ class BankAccount {
     public:
         // Constructor
         BankAccount(int accountNumber, const string &holderName, double initialBalance) {
-            // TODO: Initialize member variables
+            this->accountNumber = accountNumber;
+            this->holderName = holderName;
+            this->balance = initialBalance;
         }
 
         // Member functions
-        // TODO: Implement member functions for deposit, withdraw, and check balance
+        void deposit(double amount){
+            if( amount >= 0){
+                balance += amount;
+            }
+        }
+
+        void withdraw(double amount){
+            if(amount >= 0 && amount <= balance){
+                balance -= amount;
+            }else {
+            cout << "Insufficient balance!" << endl;
+            }
+        }
+
+        void checkBalance(){
+            cout << "Account Number: " << accountNumber << endl;
+            cout << "Holder Name: " << holderName << endl;
+            cout << "Balance: " << balance << endl;
+        }
+
+
 };
 
 
@@ -40,22 +62,19 @@ class BankAccount {
 int main() {
 
     // TODO: Create an instance of the BankAccount class
+    BankAccount account1(111, "Nemii", 5000.0 );
+    
     // TODO: Test the deposit, withdraw, and check balance operations
+    cout << "Account Details: " << endl;
 
-    /*
-        You need to complete the implementation of the BankAccount class by:
+    account1.checkBalance();
+    account1.deposit(2500);
+    account1.withdraw(300);
 
-        1. Initializing the member variables in the constructor.
-        2. Implementing member functions for deposit, withdraw, and check balance.
-        3. Testing the functionality of your class in the main function by creating an instance 
-        of BankAccount and performing deposit, withdrawal, and balance checks.
-        
-        Remember to enforce encapsulation by keeping the member variables private and providing public member functions to access and modify them.
+    cout << endl;
+    cout << "After Account Details: " << endl;
 
-        This exercise will help you practice encapsulation and understand how to hide 
-        implementation details while exposing a controlled interface to the users of your class!
-    */
+    account1.checkBalance();
 
     return 0;
 }
-

@@ -35,6 +35,7 @@ using namespace std;
     Here's a code template to get you started:
 */
 
+
 class Employee {
     private:
         string name;
@@ -43,7 +44,33 @@ class Employee {
         double salary;
 
     public:
-        // TODO: Implement setters and getters
+    //setter functions
+        void setName(const string& name){
+            this->name = name;
+        }
+        void setAge(int age){
+            this->age = age;
+        }
+        void setPosition(const string& position){
+            this->position = position;
+        }
+        void setSalary(double salary){
+            this->salary = salary;
+        }
+
+    //getter functions
+        string getName() const{
+            return name;
+        }
+        int getAge() const{
+            return age;
+        }
+        string getPosition() const{
+            return position;
+        }
+        double getSalary() const{
+            return salary;
+        }
 
 };
 
@@ -51,6 +78,20 @@ class Employee {
 int main() {
 
     // TODO: Test the Employee class by creating an object, setting attributes, and getting attribute values
+
+    Employee emp1;
+
+    emp1.setName("Nemii");
+    emp1.setAge(20);
+    emp1.setPosition("Backend Developer");
+    emp1.setSalary(2550);
+
+    cout << "Employee Details: " << endl;
+
+    cout << "Name: " << emp1.getName() << endl;
+    cout << "Age: " << emp1.getAge() << endl;
+    cout << "Position: " << emp1.getPosition() << endl;
+    cout << "Salary: " << emp1.getSalary() << endl;
 
     return 0;
 }

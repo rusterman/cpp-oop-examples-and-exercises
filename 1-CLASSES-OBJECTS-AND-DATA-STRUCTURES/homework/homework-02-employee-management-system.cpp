@@ -36,10 +36,64 @@ using namespace std;
 */
 
 
+class Employee{
+private:
+    int employeeID;
+    string employeeName;
+    string designation;
+    double salary;
 
-/*  Solution */
+public:
+    //defult constructors
+    Employee() {
+        employeeID = 0;
+        employeeName = "Unknown";
+        designation = "Not assigned";
+        salary = 0.0;
+    }
 
+    Employee(int id, string name, string des, double salary) {
+        employeeID = id;
+        employeeName = name;
+        designation = des;
+        this->salary = salary;
+    }
 
+    // setter functions
+    void setID(int id){
+        employeeID = id;
+    }
+    void setName(string name){
+        employeeName = name;
+    }
+    void setDesignation(string des){
+        designation = des;
+    }
+    void setSalary(double salary){
+        this->salary = salary;
+    }
+
+    //getter functions
+    int getID(){
+        return employeeID;
+    }
+    string getName(){
+        return employeeName;
+    }
+    string getDesignation(){
+        return designation;
+    }
+    double getSalary(){
+        return salary;
+    }
+
+    void displayDetails() {
+        cout << "Employee ID: " << employeeID << endl;
+        cout << "Employee Name: " << employeeName << endl;
+        cout << "Designation: " << designation << endl;
+        cout << "Salary: " << salary << endl;
+    }
+};
 
 int main() {
 
