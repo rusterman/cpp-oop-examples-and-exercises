@@ -57,8 +57,8 @@ public:
     void deposit(double amount){
         if( amount > 0){
             balance += amount;
+            cout << "Deposit successful. Current balance: " << balance << endl;
         }
-        cout << "Deposit successful. Current balance: " << balance << endl;
     }
 
     void withdraw(double amount){

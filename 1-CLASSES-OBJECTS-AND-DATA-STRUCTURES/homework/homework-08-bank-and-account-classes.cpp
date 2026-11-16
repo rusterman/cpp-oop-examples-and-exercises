@@ -50,7 +50,84 @@ using namespace std;
     Solution 
 */
 
+class BankAccount{
+private:
+    int accountNumber;
+    double balance;
 
+public:
+    BankAccount(int accNumber){
+        this->accountNumber = accNumber;
+        this->balance = 0;
+    }
+
+    BankAccount(){
+        accountNumber = 0;
+        balance = 0;
+    }
+
+    
+    void setAccountNumber(int number){
+        accountNumber = number;
+    }
+
+    void deposit(double amount){
+        if(amount > 0 ){
+            balance += amount;
+            cout << "Deposit successful. Current balance: " << balance << endl;
+        }
+    }
+
+    void withdraw(double amount){
+        if(amount > 0 && amount <= balance){
+            balance -= amount;
+            cout << "Withdrawal successful. Current balance: " << balance << endl;
+        }
+        else{
+            cout << "Insufficient balance. Cannot withdraw." << endl;
+        }
+    }
+
+    void displayBalance(){
+        cout << "Account Number: " << accountNumber << endl;
+        cout << "Balamce: " << balance << endl;
+    }
+};
+
+class Bank{
+private:
+    BankAccount* accounts;
+    int numAccounts;
+
+public:
+    Bank(int num){
+        this->accounts = new BankAccount[num];
+        this->numAccounts = num;
+
+        for(int i = 0; i < numAccounts; i++){
+            accounts[i].setAccountNumber(i + 1);
+        }
+    }
+
+    ~Bank(){
+        delete[] accounts;
+    }
+
+    void performTransactions(){
+        accounts[0].deposit(500);
+        accounts[1].deposit(300);
+        accounts[2].deposit(200);
+
+        accounts[0].withdraw(100);
+        accounts[1].withdraw(50);
+    }
+
+    void displayAllBalances(){
+        for(int i = 0; i < numAccounts; ++i){
+            accounts[i].displayBalance();
+        }
+    }
+};
 
 int main() {
 
