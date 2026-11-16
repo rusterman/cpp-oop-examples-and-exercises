@@ -31,12 +31,52 @@ using namespace std;
 */
 
 
-/* 
-    Solution 
-*/
 class BankAccount {
-}
+private:
+    int accountNumber;
+    double balance;
 
+    static int objectCount;
+
+public:
+    BankAccount(int number){
+        this->accountNumber = number;
+        this->balance = 0; 
+
+        ++objectCount;
+    }
+
+    ~BankAccount(){
+        --objectCount;
+
+        if(objectCount == 0){
+            cout << "Bank accounts are closed!" << endl;
+        }
+    };
+
+    void deposit(double amount){
+        if( amount > 0){
+            balance += amount;
+        }
+        cout << "Deposit successful. Current balance: " << balance << endl;
+    }
+
+    void withdraw(double amount){
+        if( amount > 0 && amount <=balance){
+            balance -= amount;
+            cout << "Withdrawal successful. Current balance: " << balance << endl;
+        }else{
+            cout << "Insufficient balance. Cannot withdraw." << endl;        
+        }
+    }
+
+    double getBalance(){
+        return balance;
+    }
+
+};
+
+int BankAccount ::objectCount = 0;
 
 int main() {
 
