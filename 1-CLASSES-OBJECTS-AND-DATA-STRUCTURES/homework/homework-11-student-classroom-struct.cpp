@@ -25,7 +25,12 @@ using namespace std;
 
 /* Solution */
 struct Student {
-    // Complete the code
+    string name;
+    int rollNumber;
+    double mathMarks;
+    double physicsMarks;
+    double chemistryMarks;
+
 };
 
 class Classroom {
@@ -33,7 +38,30 @@ class Classroom {
         vector<Student> students;
 
     public:
-        // Complete the code
+        void addStudent(Student A){
+            students.push_back(A);
+        }
+
+        void displayStudents(){
+            for(int i = 0; i < students.size(); i++){
+                cout << "Name: " << students[i].name << endl;
+                cout << "Roll Number: " << students[i].rollNumber << endl;
+                cout << "Math Mark: " << students[i].mathMarks << endl;
+                cout << "Physic Mark: " << students[i].physicsMarks << endl;
+                cout << "Chemistry Mark: " << students[i].chemistryMarks << endl;
+            }
+        }
+
+        double calculateAverage(Student s){
+            return (s.mathMarks + s.chemistryMarks + s.physicsMarks) / 3;
+        }
+
+        void displayAverageMarks(){
+            for(int i = 0; i < students.size(); i++){
+                cout << students[i].name << " Average: "
+                    << calculateAverage(students[i]) << endl;
+            }
+        }
 };
 
 
